@@ -1,5 +1,5 @@
 
 public interface IMove
 {
-    void Move();
+    void Move(float x, float z);
 }

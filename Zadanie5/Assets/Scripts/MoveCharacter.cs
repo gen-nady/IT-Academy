@@ -12,29 +12,39 @@ public class MoveCharacter : MonoBehaviour, IMove
     public float jumpHeight = 3f;
 
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
+    public float groundDistance = 0.2f;
     public LayerMask groundMask;
     public bool isGrounded;
 
     Vector3 velocity;
-
+    int screenDivision;
     float xRotation = 0f;
 
     private float rotateSpeedModifier = 3f;
-    Touch touch;
+    Touch[] myTouches;
     public Transform playerBody;
-
+    void Start()
+    {
+        Input.multiTouchEnabled = true;
+    }
     private void Update()
     {
-        Move();
+        RotationCharacter();
+        CheckGround();
+        Gravity();
     }
     public void RotationCharacter()
     {
         if (Input.touchCount > 0)
         {
-            touch = Input.GetTouch(0);
-            float touchFingX = touch.deltaPosition.x * rotateSpeedModifier * Mathf.Deg2Rad;
-            float touchFingY = touch.deltaPosition.y * rotateSpeedModifier * Mathf.Deg2Rad;
+            myTouches = Input.touches;
+            float touchFingX=0f;
+            float touchFingY=0f;
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                 touchFingX = myTouches[i].deltaPosition.x * rotateSpeedModifier * Mathf.Deg2Rad;
+                 touchFingY = myTouches[i].deltaPosition.y * rotateSpeedModifier * Mathf.Deg2Rad; 
+            }
             xRotation += touchFingY;
             xRotation = Mathf.Clamp(xRotation, -90f, 90f);
             playerBody.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
@@ -47,28 +57,22 @@ public class MoveCharacter : MonoBehaviour, IMove
         if (isGrounded && velocity.y == 0f)
             velocity.y = -2f;
     }
-    void Jump()
+    public void Jump()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded)
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        if (isGrounded)
+            velocity.y =  Mathf.Sqrt(jumpHeight * -2f * gravity);
     }
     void Gravity()
     {
         velocity.y += gravity * Time.deltaTime;
         characterCon.Move(velocity * Time.deltaTime);
     }
-
-    public void Move()
+    public void Move(float x, float z)
     {
-        CheckGround();
-
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        Vector3 move = transform.right * x + transform.forward * z;
-        characterCon.Move(move * speed * Time.deltaTime);
-
-        Jump();
-        Gravity();
+        if (Input.touchCount > 0)
+        {           
+            Vector3 vectorMove = transform.right * x + transform.forward * z;
+            characterCon.Move(vectorMove * speed * Time.deltaTime);            
+        }
     }
 }
