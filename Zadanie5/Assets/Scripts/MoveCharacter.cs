@@ -16,12 +16,11 @@ public class MoveCharacter : MonoBehaviour, IMove
     public LayerMask groundMask;
     public bool isGrounded;
 
-    Vector3 velocity;
-    int screenDivision;
-    float xRotation = 0f;
+    float velocity;
+    
 
     private float rotateSpeedModifier = 3f;
-    Touch[] myTouches;
+    
     public Transform playerBody;
     void Start()
     {
@@ -37,13 +36,13 @@ public class MoveCharacter : MonoBehaviour, IMove
     {
         if (Input.touchCount > 0)
         {
-            myTouches = Input.touches;
+            float xRotation = 0f;
             float touchFingX=0f;
             float touchFingY=0f;
             for (int i = 0; i < Input.touchCount; i++)
             {
-                 touchFingX = myTouches[i].deltaPosition.x * rotateSpeedModifier * Mathf.Deg2Rad;
-                 touchFingY = myTouches[i].deltaPosition.y * rotateSpeedModifier * Mathf.Deg2Rad; 
+                 touchFingX = Input.touches[i].deltaPosition.x * rotateSpeedModifier * Mathf.Deg2Rad;
+                 touchFingY = Input.touches[i].deltaPosition.y * rotateSpeedModifier * Mathf.Deg2Rad; 
             }
             xRotation += touchFingY;
             xRotation = Mathf.Clamp(xRotation, -90f, 90f);
@@ -54,18 +53,18 @@ public class MoveCharacter : MonoBehaviour, IMove
     void CheckGround()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        if (isGrounded && velocity.y == 0f)
-            velocity.y = -2f;
+        if (isGrounded && velocity == 0f)
+            velocity = -2f;
     }
     public void Jump()
     {
         if (isGrounded)
-            velocity.y =  Mathf.Sqrt(jumpHeight * -2f * gravity);
+            velocity =  Mathf.Sqrt(jumpHeight * -2f * gravity);
     }
     void Gravity()
     {
-        velocity.y += gravity * Time.deltaTime;
-        characterCon.Move(velocity * Time.deltaTime);
+        velocity += gravity * Time.deltaTime;
+        characterCon.Move(new Vector3(0f,velocity,0f) * Time.deltaTime);
     }
     public void Move(float x, float z)
     {

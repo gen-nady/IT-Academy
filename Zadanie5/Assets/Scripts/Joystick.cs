@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Joystick : MonoBehaviour
 {
@@ -17,9 +18,11 @@ public class Joystick : MonoBehaviour
         if (Input.touchCount > 0)
         {
             myTouches = Input.touches;
+            if(myTouches[i] > Screen.width)
             for (int i = 0; i < Input.touchCount; i++)
             {
-                Vector3 touchPos = Input.touches[i].position;
+                    if (myTouches[i] > Screen.width)
+                        Vector3 touchPos = Input.touches[i].position;
                 //Vector3 touchPos = new Vector3(Mathf.Clamp(Input.GetTouch(0).position.x, -7f, 7f), Mathf.Clamp(Input.GetTouch(0).position.y, -7f, 7f), 0);
                 targetVector = touchPos - transform.position;
                 if (targetVector.magnitude < 151)
@@ -35,4 +38,5 @@ public class Joystick : MonoBehaviour
             }
         }
     }
+    void On
 }
