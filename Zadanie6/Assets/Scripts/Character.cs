@@ -14,7 +14,7 @@ public class Character : MonoBehaviour
     Camera characterCamera;
     Animator animator;
     float rotationAngle;
-    float targetAnimationSpeed=0f;
+    float targetAnimationSpeed = 0f;
     bool isSprint = false;
 
     float speedY = 0f;
@@ -48,65 +48,68 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-        if (isSpawn) { 
-        float vertical = Input.GetAxis("Vertical");
-        float horizontal = Input.GetAxis("Horizontal");
+        if (isSpawn)
+        {
+            float vertical = Input.GetAxis("Vertical");
+            float horizontal = Input.GetAxis("Horizontal");
 
-        if (Input.GetKey(KeyCode.Space) && !isJump)
-        {
-            isJump = true;
-            CharacterAnimator.SetTrigger("Jump");
-            speedY += jumpSpeed;
-        }
-        if (!Controller.isGrounded)
-        {
-            speedY += gravity * Time.deltaTime;
-        }
-        else if (speedY < 0f)
-        {
-            speedY = 0f;
-        }
-
-        CharacterAnimator.SetFloat("SpeedY", speedY / jumpSpeed);
-        if (isJump && speedY < 0f)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, 1f, LayerMask.GetMask("Default")))
+            if (Input.GetKey(KeyCode.Space) && !isJump)
             {
-                isJump = false;
-                CharacterAnimator.SetTrigger("Land");
+                isJump = true;
+                CharacterAnimator.SetTrigger("Jump");
+                speedY += jumpSpeed;
             }
-        }
-        if (Input.GetMouseButtonDown(0))
-        {
-            int rand = Random.Range(0, 2) - 1;
-            CharacterAnimator.SetFloat("Attack", rand);
-            CharacterAnimator.SetTrigger("Attackk");
-        }
-        if (Input.GetKey(KeyCode.E) && !isJump)
-        {
-            CharacterAnimator.SetTrigger("Death");
-        }
-            isSprint = Input.GetKey(KeyCode.LeftShift);
-        Vector3 movement = new Vector3(horizontal, 0f, vertical);
-        Vector3 rotatedMovement = Quaternion.Euler(0f, CharacterCamera.transform.rotation.eulerAngles.y, 0f) * movement.normalized;
-        Vector3 verticalMovement = Vector3.up * speedY;
-        float currentSpeed = isSprint ? sprintSpeed : movementSpeed;
-        Controller.Move((verticalMovement + rotatedMovement*currentSpeed) * Time.deltaTime);
+            if (!Controller.isGrounded)
+            {
+                speedY += gravity * Time.deltaTime;
+            }
+            else if (speedY < 0f)
+            {
+                speedY = 0f;
+            }
 
-        if (rotatedMovement.sqrMagnitude > 0f)
-        {
-            rotationAngle = Mathf.Atan2(rotatedMovement.x, rotatedMovement.z) * Mathf.Rad2Deg;
-            targetAnimationSpeed = isSprint ? 1f : 0.5f;
-        }
-        else
-        {
-            targetAnimationSpeed = 0f;
-        }
-        CharacterAnimator.SetFloat("Speed", Mathf.Lerp(CharacterAnimator.GetFloat("Speed"), targetAnimationSpeed, animationBlendSpeed));
-        Quaternion currentRotation = Controller.transform.rotation;
-        Quaternion targetRotation = Quaternion.Euler(0f, rotationAngle, 0f);
-        Controller.transform.rotation = Quaternion.Lerp(currentRotation, targetRotation, rotationSpeed);
+            CharacterAnimator.SetFloat("SpeedY", speedY / jumpSpeed);
+            if (isJump && speedY < 0f)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, Vector3.down, out hit, 2f, LayerMask.GetMask("Default")))
+                {
+                    isJump = false;
+                    CharacterAnimator.SetTrigger("Land");
+                }
             }
+            if (Input.GetMouseButtonDown(0))
+            {
+                int rand = Random.Range(-1, 2);
+                CharacterAnimator.SetFloat("Attack", rand);
+                CharacterAnimator.SetTrigger("Attackk");
+            }
+            if (Input.GetKey(KeyCode.E) && !isJump)
+            {
+                CharacterAnimator.SetTrigger("Death");
+            }
+            isSprint = Input.GetKey(KeyCode.LeftShift);
+            Vector3 movement = new Vector3(horizontal, 0f, vertical);
+            Vector3 rotatedMovement = Quaternion.Euler(0f, CharacterCamera.transform.rotation.eulerAngles.y, 0f) * movement.normalized;
+            Vector3 verticalMovement = Vector3.up * speedY;
+            float currentSpeed = isSprint ? sprintSpeed : movementSpeed;
+            //Controller.Move(((verticalMovement + rotatedMovement) * currentSpeed) * Time.deltaTime);
+            Vector3 move = transform.right * horizontal + transform.forward * vertical;
+            Controller.Move(movement * currentSpeed * Time.deltaTime);
+
+            if (rotatedMovement.sqrMagnitude > 0f)
+            {
+                rotationAngle = Mathf.Atan2(rotatedMovement.x, rotatedMovement.z) * Mathf.Rad2Deg;
+                targetAnimationSpeed = isSprint ? 1f : 0.5f;
+            }
+            else
+            {
+                targetAnimationSpeed = 0f;
+            }
+            CharacterAnimator.SetFloat("Speed", Mathf.Lerp(CharacterAnimator.GetFloat("Speed"), targetAnimationSpeed, animationBlendSpeed));
+            Quaternion currentRotation = Controller.transform.rotation;
+            Quaternion targetRotation = Quaternion.Euler(0f, rotationAngle, 0f);
+            Controller.transform.rotation = Quaternion.Lerp(currentRotation, targetRotation, rotationSpeed);
+        }
     }
 }
