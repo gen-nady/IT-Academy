@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveCharacter : MonoBehaviour, IMove
@@ -17,7 +15,7 @@ public class MoveCharacter : MonoBehaviour, IMove
     public bool isGrounded;
 
     float velocity;
-    
+    public GameObject joystick;
 
     private float rotateSpeedModifier = 3f;
     
@@ -36,18 +34,24 @@ public class MoveCharacter : MonoBehaviour, IMove
     {
         if (Input.touchCount > 0)
         {
-            float xRotation = 0f;
-            float touchFingX=0f;
-            float touchFingY=0f;
+            Touch[] myTouches = Input.touches;
             for (int i = 0; i < Input.touchCount; i++)
             {
-                 touchFingX = Input.touches[i].deltaPosition.x * rotateSpeedModifier * Mathf.Deg2Rad;
-                 touchFingY = Input.touches[i].deltaPosition.y * rotateSpeedModifier * Mathf.Deg2Rad; 
+                if (myTouches[i].position.x > Screen.width / 2)
+                {
+                    float xRotation = 0f;
+                    float touchFingX = Input.touches[i].deltaPosition.x * rotateSpeedModifier * Mathf.Deg2Rad;
+                    float touchFingY = Input.touches[i].deltaPosition.y * rotateSpeedModifier * Mathf.Deg2Rad;
+                    xRotation += touchFingY;
+                    xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+                    playerBody.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+                    transform.Rotate(Vector3.up * touchFingX);
+                }
+                else
+                {
+                    joystick.SetActive(true);
+                }
             }
-            xRotation += touchFingY;
-            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-            playerBody.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-            transform.Rotate(Vector3.up * touchFingX);
         }
     }
     void CheckGround()
