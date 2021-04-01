@@ -72,7 +72,7 @@ public class Character : MonoBehaviour
             if (isJump && speedY < 0f)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, Vector3.down, out hit, 2f, LayerMask.GetMask("Default")))
+                if (Physics.Raycast(transform.position, Vector3.down, out hit, 1f, LayerMask.GetMask("Default")))
                 {
                     isJump = false;
                     CharacterAnimator.SetTrigger("Land");
@@ -93,9 +93,7 @@ public class Character : MonoBehaviour
             Vector3 rotatedMovement = Quaternion.Euler(0f, CharacterCamera.transform.rotation.eulerAngles.y, 0f) * movement.normalized;
             Vector3 verticalMovement = Vector3.up * speedY;
             float currentSpeed = isSprint ? sprintSpeed : movementSpeed;
-            //Controller.Move(((verticalMovement + rotatedMovement) * currentSpeed) * Time.deltaTime);
-            Vector3 move = transform.right * horizontal + transform.forward * vertical;
-            Controller.Move(movement * currentSpeed * Time.deltaTime);
+            Controller.Move((verticalMovement + rotatedMovement * currentSpeed) * Time.deltaTime);
 
             if (rotatedMovement.sqrMagnitude > 0f)
             {
@@ -108,8 +106,11 @@ public class Character : MonoBehaviour
             }
             CharacterAnimator.SetFloat("Speed", Mathf.Lerp(CharacterAnimator.GetFloat("Speed"), targetAnimationSpeed, animationBlendSpeed));
             Quaternion currentRotation = Controller.transform.rotation;
-            Quaternion targetRotation = Quaternion.Euler(0f, rotationAngle, 0f);
-            Controller.transform.rotation = Quaternion.Lerp(currentRotation, targetRotation, rotationSpeed);
+            if (!Input.GetKey(KeyCode.S))
+            {
+                Quaternion targetRotation = Quaternion.Euler(0f, rotationAngle, 0f);
+                Controller.transform.rotation = Quaternion.Lerp(currentRotation, targetRotation, rotationSpeed);
+            }
         }
     }
 }
