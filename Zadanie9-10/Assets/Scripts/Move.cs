@@ -1,0 +1,4 @@
+interface Move
+{
+    void Move();
+}
