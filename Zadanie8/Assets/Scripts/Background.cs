@@ -16,17 +16,17 @@ public class Background : MonoBehaviour
         {
             if (!isSwitch)
             {
-                if (background[i].transform.position.x > -6f)
+                if (background[i].transform.position.x > -5.5f)
                     background[i].transform.Translate(Vector2.left * Time.deltaTime * speed);
                 else
-                    background[i].transform.position = new Vector2(6f, background[i].transform.position.y);
+                    background[i].transform.position = new Vector2(13f, background[i].transform.position.y);
             }
             else if (isSwitch)
             {
-                if (background[i].transform.position.x < 6f)
+                if (background[i].transform.position.x < 13f)
                     background[i].transform.Translate(Vector2.right * Time.deltaTime * speed);
                 else
-                    background[i].transform.position = new Vector2(-6f, background[i].transform.position.y);
+                    background[i].transform.position = new Vector2(-5.5f, background[i].transform.position.y);
             }
 
         }
@@ -34,17 +34,17 @@ public class Background : MonoBehaviour
         {
             if (!isSwitch)
             {
-                if (background[i].transform.position.x > -6f)
+                if (background[i].transform.position.x > -5.5f)
                     background[i].transform.Translate(Vector2.left * Time.deltaTime * speed*speed);
                 else
-                    background[i].transform.position = new Vector2(6f, background[i].transform.position.y);
+                    background[i].transform.position = new Vector2(13f, background[i].transform.position.y);
             }
             else if (isSwitch)
             {
-                if (background[i].transform.position.x < 6f)
+                if (background[i].transform.position.x < 13f)
                     background[i].transform.Translate(Vector2.right * Time.deltaTime * speed* speed);
                 else
-                    background[i].transform.position = new Vector2(-6f, background[i].transform.position.y);
+                    background[i].transform.position = new Vector2(-5.5f, background[i].transform.position.y);
             }
 
         }
