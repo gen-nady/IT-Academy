@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
 	{
 		if (coll.gameObject.tag == "Wall")
 			direction *= -1f;
-		if (coll.gameObject.tag == "Enemy")
+		if (coll.gameObject.tag == "EnemyDestroy")
 			direction *= -1f;
 	}
 }
