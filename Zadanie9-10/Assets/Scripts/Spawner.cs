@@ -1,0 +1,4 @@
+ interface Spawner
+{
+    void Spawn();
+}
