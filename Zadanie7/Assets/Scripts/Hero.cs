@@ -14,6 +14,7 @@ public class Hero : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     public bool isGrounded;
+    bool isBox=false;
 
     Vector3 velocity;
 
@@ -53,13 +54,15 @@ public class Hero : MonoBehaviour
 
     private void OnTriggerEnter(Collider coll)
     {
-        if (coll.CompareTag("Box1"))
+        if (coll.CompareTag("Box1") && !isBox)
         {
             boxTwo.transform.position = new Vector3(boxTwo.transform.position.x, boxTwo.transform.position.y + 112, boxTwo.transform.position.z);
+            isBox = true;
         }
-        if (coll.CompareTag("Box2"))
+        if (coll.CompareTag("Box2") && isBox)
         {
             boxOne.transform.position = new Vector3(boxOne.transform.position.x, boxOne.transform.position.y + 112, boxOne.transform.position.z);
+            isBox = false;
         }
     }
 }
