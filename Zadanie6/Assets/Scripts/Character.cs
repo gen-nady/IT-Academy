@@ -13,7 +13,7 @@ public class Character : MonoBehaviour
     CharacterController controller;
     Camera characterCamera;
     Animator animator;
-    float rotationAngle;
+    float rotationAngle =0f;
     float targetAnimationSpeed = 0f;
     bool isSprint = false;
 
@@ -53,7 +53,7 @@ public class Character : MonoBehaviour
             float vertical = Input.GetAxis("Vertical");
             float horizontal = Input.GetAxis("Horizontal");
 
-            if (Input.GetKey(KeyCode.Space) && !isJump)
+            if (Input.GetKeyDown(KeyCode.Space) && !isJump)
             {
                 isJump = true;
                 CharacterAnimator.SetTrigger("Jump");
@@ -84,7 +84,7 @@ public class Character : MonoBehaviour
                 CharacterAnimator.SetFloat("Attack", rand);
                 CharacterAnimator.SetTrigger("Attackk");
             }
-            if (Input.GetKey(KeyCode.E) && !isJump)
+            if (Input.GetKeyDown(KeyCode.E) && !isJump)
             {
                 CharacterAnimator.SetTrigger("Death");
             }
@@ -93,7 +93,7 @@ public class Character : MonoBehaviour
             Vector3 rotatedMovement = Quaternion.Euler(0f, CharacterCamera.transform.rotation.eulerAngles.y, 0f) * movement.normalized;
             Vector3 verticalMovement = Vector3.up * speedY;
             float currentSpeed = isSprint ? sprintSpeed : movementSpeed;
-            Controller.Move((verticalMovement + rotatedMovement * currentSpeed) * Time.deltaTime);
+            Controller.Move((verticalMovement+ rotatedMovement * currentSpeed) * Time.deltaTime);
 
             if (rotatedMovement.sqrMagnitude > 0f)
             {
@@ -106,11 +106,8 @@ public class Character : MonoBehaviour
             }
             CharacterAnimator.SetFloat("Speed", Mathf.Lerp(CharacterAnimator.GetFloat("Speed"), targetAnimationSpeed, animationBlendSpeed));
             Quaternion currentRotation = Controller.transform.rotation;
-            if (!Input.GetKey(KeyCode.S))
-            {
-                Quaternion targetRotation = Quaternion.Euler(0f, rotationAngle, 0f);
-                Controller.transform.rotation = Quaternion.Lerp(currentRotation, targetRotation, rotationSpeed);
-            }
+            Quaternion targetRotation = Quaternion.Euler(0f, rotationAngle, 0f);
+            Controller.transform.rotation = Quaternion.Lerp(currentRotation, targetRotation, rotationSpeed);
         }
     }
 }
