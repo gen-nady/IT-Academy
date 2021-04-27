@@ -125,3 +125,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 25
   power: 100
+  ps: {fileID: 198917022394846920, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
+  go: {fileID: 0}
