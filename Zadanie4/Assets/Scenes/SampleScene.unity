@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 38458613}
   - component: {fileID: 38458612}
   - component: {fileID: 38458611}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cube (3)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 147936679}
   - component: {fileID: 147936678}
   - component: {fileID: 147936677}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 249561452}
   - component: {fileID: 249561451}
   - component: {fileID: 249561450}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Terrain
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -650,7 +650,7 @@ MonoBehaviour:
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
   isGrounded: 0
 --- !u!136 &632394850
 CapsuleCollider:
@@ -720,15 +720,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632394848}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.724, y: 1.15, z: 21.122}
+  m_LocalRotation: {x: -0, y: 0.5360864, z: -0, w: 0.8441632}
+  m_LocalPosition: {x: -3.724, y: 1.15, z: 5.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
   - {fileID: 541467920}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 64.83501, z: 0}
 --- !u!143 &632394854
 CharacterController:
   m_ObjectHideFlags: 0
@@ -795,7 +795,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.2
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -851,13 +851,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.70115703, y: -0.033754602, z: 0.3552558, w: 0.6172786}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 117.177, y: -91.816986, z: -58.938995}
 --- !u!1 &724129278
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,7 +964,7 @@ GameObject:
   - component: {fileID: 748339243}
   - component: {fileID: 748339242}
   - component: {fileID: 748339241}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1157,7 +1157,7 @@ GameObject:
   - component: {fileID: 903029027}
   - component: {fileID: 903029026}
   - component: {fileID: 903029025}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (7)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1491,7 +1491,7 @@ GameObject:
   - component: {fileID: 1108490408}
   - component: {fileID: 1108490407}
   - component: {fileID: 1108490406}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1601,7 +1601,7 @@ GameObject:
   - component: {fileID: 1131258906}
   - component: {fileID: 1131258905}
   - component: {fileID: 1131258904}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cube (8)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1711,7 +1711,7 @@ GameObject:
   - component: {fileID: 1159039355}
   - component: {fileID: 1159039354}
   - component: {fileID: 1159039353}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cube (7)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1865,7 +1865,7 @@ GameObject:
   - component: {fileID: 1216672789}
   - component: {fileID: 1216672788}
   - component: {fileID: 1216672787}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (4)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1975,7 +1975,7 @@ GameObject:
   - component: {fileID: 1356359747}
   - component: {fileID: 1356359746}
   - component: {fileID: 1356359745}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cube (4)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -2124,7 +2124,7 @@ GameObject:
   - component: {fileID: 1400212664}
   - component: {fileID: 1400212663}
   - component: {fileID: 1400212662}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (3)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -2327,7 +2327,7 @@ GameObject:
   - component: {fileID: 1431981745}
   - component: {fileID: 1431981744}
   - component: {fileID: 1431981743}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -2437,7 +2437,7 @@ GameObject:
   - component: {fileID: 1687460362}
   - component: {fileID: 1687460361}
   - component: {fileID: 1687460360}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cube (5)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -2547,7 +2547,7 @@ GameObject:
   - component: {fileID: 1746880368}
   - component: {fileID: 1746880367}
   - component: {fileID: 1746880366}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (5)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -2657,9 +2657,9 @@ GameObject:
   - component: {fileID: 1807282859}
   - component: {fileID: 1807282858}
   - component: {fileID: 1807282857}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (8)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2767,7 +2767,7 @@ GameObject:
   - component: {fileID: 1851161107}
   - component: {fileID: 1851161106}
   - component: {fileID: 1851161105}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (6)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -2877,7 +2877,7 @@ GameObject:
   - component: {fileID: 1862610665}
   - component: {fileID: 1862610664}
   - component: {fileID: 1862610663}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -2987,7 +2987,7 @@ GameObject:
   - component: {fileID: 2002107310}
   - component: {fileID: 2002107309}
   - component: {fileID: 2002107308}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -3190,7 +3190,7 @@ GameObject:
   - component: {fileID: 2107699871}
   - component: {fileID: 2107699870}
   - component: {fileID: 2107699869}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cube (6)
   m_TagString: Ground
   m_Icon: {fileID: 0}
