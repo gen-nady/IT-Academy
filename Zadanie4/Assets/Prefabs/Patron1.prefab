@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 884312635284322556}
   - component: {fileID: 8041701407896781536}
   - component: {fileID: -770194000304772513}
+  - component: {fileID: 5201992473239193649}
   m_Layer: 0
   m_Name: Patron1
   m_TagString: Untagged
@@ -110,3 +111,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5201992473239193649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643901680072957955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b7b77a80435ee49b0eeea80ed23fb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patronEffect: {fileID: 1337198075554910, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4,
+    type: 3}

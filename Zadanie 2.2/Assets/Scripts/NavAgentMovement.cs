@@ -51,4 +51,5 @@ public class NavAgentMovement : MonoBehaviour
             other.gameObject.transform.position = Vector3.Lerp(other.transform.position, new Vector3(other.transform.position.x + 10f, other.transform.position.y, other.transform.position.z), speed);
         }
     }
+
 }
