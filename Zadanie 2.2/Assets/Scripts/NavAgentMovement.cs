@@ -6,7 +6,8 @@ public class NavAgentMovement : MonoBehaviour
     private Camera cam;
     private NavMeshAgent agent;
     private static float defaultSpeed = 10f;
-    float speed = 0f;
+    float speed = 1f;
+    public GameObject door;
     void Start()
     {
         cam = Camera.main;
@@ -20,12 +21,12 @@ public class NavAgentMovement : MonoBehaviour
         int index = IndexFromMask(hit.mask);
         if (index >= 0)
         {
-            Debug.Log(index + " " + agent.GetAreaCost(index));
+            //Debug.Log(index + " " + agent.GetAreaCost(index));
             agent.speed = defaultSpeed / agent.GetAreaCost(index);
         }
         else
         {
-            Debug.LogWarning(index);
+            //Debug.LogWarning(index);
         }
         if (Input.GetMouseButtonDown(0))
         {
@@ -45,21 +46,36 @@ public class NavAgentMovement : MonoBehaviour
         }
         return -1;
     }
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Door"))
-        {                  
-            other.gameObject.transform.position = new Vector3(other.transform.position.x + speed, other.gameObject.transform.position.y, other.gameObject.transform.position.z);
-            StartCoroutine(Door());
+        if (other.gameObject.CompareTag("Door"))
+        {                        
+            StartCoroutine(DoorOpen());
         }
     }
-    IEnumerator Door()
+    IEnumerator DoorOpen()
     {
         for (int i = 0; i < 10; i++)
         {
-            speed++;
+            door.gameObject.transform.position = new Vector3(door.transform.position.x + speed, door.gameObject.transform.position.y, door.gameObject.transform.position.z);
             yield return new WaitForSeconds(0.1f);
 
+        }
+    }
+    IEnumerator DoorClose()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            door.gameObject.transform.position = new Vector3(door.transform.position.x - speed, door.gameObject.transform.position.y, door.gameObject.transform.position.z);
+            yield return new WaitForSeconds(0.1f);
+
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Door"))
+        {
+            StartCoroutine(DoorClose());
         }
     }
 

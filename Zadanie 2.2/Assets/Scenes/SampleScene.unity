@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4502303, g: 0.49785578, b: 0.56244195, a: 1}
+  m_IndirectSpecularColor: {r: 0.45022982, g: 0.4978552, b: 0.56244135, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -794,8 +794,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 19.935478}
-  m_Center: {x: 0, y: 0, z: -9.467739}
+  m_Size: {x: 1.7416939, y: 1.5727546, z: 21.549461}
+  m_Center: {x: -0.37084684, y: -0.08279371, z: -8.660748}
 --- !u!23 &512168152
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2629,6 +2629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98ecf7926683592469987321a903cafa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 512168150}
 --- !u!195 &1963663863
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2662,9 +2663,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 3.12905
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.564525, z: 0}
 --- !u!23 &1963663865
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2722,7 +2723,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1963663861}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.9, y: 1.81, z: 1.7}
+  m_LocalPosition: {x: -14.9, y: 1.81, z: 2.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
