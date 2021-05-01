@@ -1,10 +1,12 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.AI;
 public class NavAgentMovement : MonoBehaviour
 {
     private Camera cam;
     private NavMeshAgent agent;
     private static float defaultSpeed = 10f;
+    float speed = 0f;
     void Start()
     {
         cam = Camera.main;
@@ -43,12 +45,21 @@ public class NavAgentMovement : MonoBehaviour
         }
         return -1;
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Door"))
-        {       
-            float speed = 2f;
-            other.gameObject.transform.position = Vector3.Lerp(other.transform.position, new Vector3(other.transform.position.x + 10f, other.transform.position.y, other.transform.position.z), speed);
+        {                  
+            other.gameObject.transform.position = new Vector3(other.transform.position.x + speed, other.gameObject.transform.position.y, other.gameObject.transform.position.z);
+            StartCoroutine(Door());
+        }
+    }
+    IEnumerator Door()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            speed++;
+            yield return new WaitForSeconds(0.1f);
+
         }
     }
 
