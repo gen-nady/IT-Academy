@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.17683437, g: 0.22135483, b: 0.30364424, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -641,17 +641,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9279d5f14e779164b940aed1933f2f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootPoint: {fileID: 970245468}
   characterCon: {fileID: 632394854}
   speed: 12
-  gravity: -29.8
   jumpHeight: 3
   groundCheck: {fileID: 541467920}
-  groundDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 512
-  isGrounded: 0
 --- !u!136 &632394850
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -756,16 +752,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 632394848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b5d73cd0a0b3054988bf32fa5050361, type: 3}
+  m_Script: {fileID: 11500000, guid: b872ca2d23dfb8a4980acff1bb2b3b4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeout: 0.1
   shootPosition: {fileID: 970245468}
-  bullet: {fileID: -770194000304772513, guid: 6849d3ca44adc704983f1f27f0303694, type: 3}
-  granate: {fileID: -737420031017511911, guid: b1735fac6b587af4cbe97a6c07bd7eb8, type: 3}
-  ball: {fileID: 2215119296512994736, guid: 4685aea12ba75a3428155a7e629aee19, type: 3}
-  speedBullet: 50
-  destroyBullet: 3
+  bullet: {fileID: 0}
+  granate: {fileID: 0}
+  ball: {fileID: 0}
+  speedBullet: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

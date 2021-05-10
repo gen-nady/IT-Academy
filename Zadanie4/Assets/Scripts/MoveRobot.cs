@@ -4,21 +4,16 @@ using UnityEngine;
 
 public class MoveRobot : MonoBehaviour
 {
-
-    public Transform shootPoint;
-    Rigidbody body;
-    GameObject clone;
-    // Start is called before the first frame update
     public CharacterController characterCon;
     public float speed = 12f;
-    public float gravity = -9.8f;
     public float jumpHeight = 3f;
 
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
     public LayerMask groundMask;
-    public bool isGrounded;
 
+    bool isGrounded;
+    float groundDistance = 0.4f;
+    float gravity = -9.8f;
     Vector3 velocity;
 
     private void Update()

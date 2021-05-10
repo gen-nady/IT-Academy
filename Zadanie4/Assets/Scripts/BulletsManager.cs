@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovePatron1 : MonoBehaviour
+public class BulletsManager : Singleton<BulletsManager>
 {
     public float timeout = 0.1f;
-    private float curTimeout;
     public Transform shootPosition;
     public Rigidbody bullet, granate, ball;
     public float speedBullet;
-    public float destroyBullet = 3f;
-    // Start is called before the first frame update
-    // Update is called once per frame
+
+    private float curTimeout;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
