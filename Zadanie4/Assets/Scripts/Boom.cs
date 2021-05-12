@@ -7,7 +7,6 @@ public class Boom : MonoBehaviour
     public float radius = 5.0F;
     public float power = 10.0F;
     public GameObject boomEffect;
-
     [System.Obsolete]
     private void OnCollisionEnter(Collision collision)
     {
@@ -21,13 +20,13 @@ public class Boom : MonoBehaviour
             foreach (Collider hit in colliders)
             {
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
-
-                    if (rb != null)
+                if (rb != null)
                 {
                     rb.AddExplosionForce(power, explosionPos, radius, 3.0F);
-                    
+                    AudioManager.Instanse.OnBoom();
                 }
             }
+            gameObject.SetActive(false);
         }
     }
 }
