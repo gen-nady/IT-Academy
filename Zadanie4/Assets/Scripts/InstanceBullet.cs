@@ -7,30 +7,29 @@ public class InstanceBullet : MonoBehaviour
 {
     public Transform shootPosition;
     public float speedBullet;
-    public UnityEvent bulletEvent;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            var go = BulletsManager.Instanse.GetPoolBullet();
+            GameObject go = BulletsManager.Instanse.GetPool("Bullet");
             go.transform.position = shootPosition.position;
             go.SetActive(true);
             go.GetComponent<Rigidbody>().velocity = shootPosition.forward * speedBullet;
-            bulletEvent.Invoke();
+            AudioManager.Instanse.OnShoot();
         }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            var go = BulletsManager.Instanse.GetPoolGranate();
-            go.transform.position = shootPosition.position;
-            go.SetActive(true);
-            go.GetComponent<Rigidbody>().AddForce(shootPosition.forward * speedBullet, ForceMode.Impulse);
-        }
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            var go = BulletsManager.Instanse.GetPoolBounce();
-            go.transform.position = shootPosition.position;
-            go.SetActive(true);
-            go.GetComponent<Rigidbody>().velocity = shootPosition.forward * speedBullet;
-        }
+        ////if (Input.GetKeyDown(KeyCode.F))
+        ////{
+        ////    var go = BulletsManager.Instanse.GetPoolGranate();
+        ////    go.transform.position = shootPosition.position;
+        ////    go.SetActive(true);
+        ////    go.GetComponent<Rigidbody>().AddForce(shootPosition.forward * speedBullet, ForceMode.Impulse);
+        ////}
+        ////if (Input.GetKeyDown(KeyCode.Mouse1))
+        ////{
+        ////    var go = BulletsManager.Instanse.GetPoolBounce();
+        ////    go.transform.position = shootPosition.position;
+        ////    go.SetActive(true);
+        ////    go.GetComponent<Rigidbody>().velocity = shootPosition.forward * speedBullet;
+        ////}
     }
 }

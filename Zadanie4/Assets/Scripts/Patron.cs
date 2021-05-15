@@ -4,7 +4,6 @@ using UnityEngine.Events;
 public class Patron : MonoBehaviour
 {
     public GameObject patronEffect;
-    public UnityEvent callBack;
     [Obsolete]
     private void OnCollisionEnter(Collision collision)
     {
@@ -13,7 +12,7 @@ public class Patron : MonoBehaviour
             GameObject p = Instantiate(patronEffect, transform.position, Quaternion.identity) as GameObject;  //генерация анимации
             p.GetComponent<ParticleSystem>().Play(); //вопрсоизведение анимации
             Destroy(p, p.GetComponent<ParticleSystem>().duration); //уничтожение анимации 
-            callBack?.Invoke();
+            BulletsManager.Instanse.InvokeEvent(gameObject);
         }
     }
 }

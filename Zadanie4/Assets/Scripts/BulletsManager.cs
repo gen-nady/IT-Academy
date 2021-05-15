@@ -1,68 +1,79 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using UnityEngine.Events;
 public class BulletsManager : Singleton<BulletsManager>
 {
     public int amountPool = 20;
     public GameObject[] bullets;
 
+    public delegate void OnShoot(GameObject gam);
+    public static event OnShoot onShootEvent;
 
-    List<GameObject> poolBullets = new List<GameObject>();
-    List<GameObject> poolGranate = new List<GameObject>();
-    List<GameObject> poolBounce = new List<GameObject>();
+    enum bullet { Bullet, Granate, Ball }
+    Dictionary<string, List<GameObject>> poolBullet = new Dictionary<string, List<GameObject>>();
+
 
 
     private void Awake()
     {
-        for (int i = 0; i < amountPool; i++)
-        {
-            for (int j = 0; j < bullets.Length; j++)
-            {
-                var go = Instantiate(bullets[j], transform.position, Quaternion.identity);
+        onShootEvent += ResetBullet;
 
+        List<GameObject> pool = new List<GameObject>();
+        for (int i = 0; i < bullets.Length; i++)
+        {
+            for (int j = 0; j < amountPool; j++)
+            {
+                var go = Instantiate(bullets[i], transform.position, Quaternion.identity);
                 go.transform.SetParent(transform);
                 go.SetActive(false);
-                if (j == 0)                
-                    poolBullets.Add(go);                           
-                else if (j == 1)
-                    poolGranate.Add(go);
-                else if (j == 2)
-                    poolBounce.Add(go);
+                pool.Add(go);
             }
+            poolBullet.Add(bullets[i].name.ToString(), pool);
+            pool.Clear();
         }
     }
-    public GameObject GetPoolBullet()
+    public GameObject GetPool(string bul)
     {
-        for (int i = 0; i < poolBullets.Count; i++)
+        ////1
+        //List<GameObject> listNumber = new List<GameObject>();
+        //listNumber = poolBullet[bul].ToList();
+        ////2
+        //var all = new List<GameObject>();
+        //foreach (KeyValuePair<string, List<GameObject>> kvp in poolBullet)
+        //{
+        //    all.AddRange(kvp.Value);
+        //}
+        ////3
+        //var all1 = new List<GameObject>();
+        //foreach (var value in poolBullet)
+        //{
+        //    foreach (var item in value.Value)
+        //        all1.Add(item);
+        //}
+
+
+        //Debug.Log(bullets[0].name.ToString());
+        //Debug.Log(all1.Count);
+        //Debug.Log(bul);
+
+        for (int i = 0; i < poolBullet[bul].Count; i++)
         {
-            if (!poolBullets[i].activeInHierarchy)
+            if (!poolBullet[bul][i].activeInHierarchy)
             {
-                return poolBullets[i];
+               return poolBullet[bul][i];
             }
         }
         return null;
     }
-    public GameObject GetPoolGranate()
+    public void InvokeEvent(GameObject gam)
     {
-        for (int i = 0; i < poolGranate.Count; i++)
-        {
-            if (!poolGranate[i].activeInHierarchy)
-            {
-                return poolGranate[i];
-            }
-        }
-        return null;
+        onShootEvent(gam);
     }
-    public GameObject GetPoolBounce()
+    private void ResetBullet(GameObject gam)
     {
-        for (int i = 0; i < poolBounce.Count; i++)
-        {
-            if (!poolBounce[i].activeInHierarchy)
-            {
-                return poolBounce[i];
-            }
-        }
-        return null;
+        gam.SetActive(false);
+        gam = default;
     }
 }
