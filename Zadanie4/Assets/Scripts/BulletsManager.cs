@@ -11,10 +11,7 @@ public class BulletsManager : Singleton<BulletsManager>
     public delegate void OnShoot(GameObject gam);
     public static event OnShoot onShootEvent;
 
-    enum bullet { Bullet, Granate, Ball }
     Dictionary<string, List<GameObject>> poolBullet = new Dictionary<string, List<GameObject>>();
-
-
 
     private void Awake()
     {
