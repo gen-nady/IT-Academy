@@ -11,18 +11,16 @@ public class BulletsManager : Singleton<BulletsManager>
     public delegate void OnShoot(GameObject gam);
     public static event OnShoot onShootEvent;
 
-    enum bullet { Bullet, Granate, Ball }
     Dictionary<string, List<GameObject>> poolBullet = new Dictionary<string, List<GameObject>>();
-
-
 
     private void Awake()
     {
         onShootEvent += ResetBullet;
 
-        List<GameObject> pool = new List<GameObject>();
+        
         for (int i = 0; i < bullets.Length; i++)
         {
+            List<GameObject> pool = new List<GameObject>();
             for (int j = 0; j < amountPool; j++)
             {
                 var go = Instantiate(bullets[i], transform.position, Quaternion.identity);
@@ -31,40 +29,35 @@ public class BulletsManager : Singleton<BulletsManager>
                 pool.Add(go);
             }
             poolBullet.Add(bullets[i].name.ToString(), pool);
-            pool.Clear();
         }
     }
     public GameObject GetPool(string bul)
     {
-        ////1
-        //List<GameObject> listNumber = new List<GameObject>();
-        //listNumber = poolBullet[bul].ToList();
-        ////2
-        //var all = new List<GameObject>();
-        //foreach (KeyValuePair<string, List<GameObject>> kvp in poolBullet)
-        //{
-        //    all.AddRange(kvp.Value);
-        //}
-        ////3
-        //var all1 = new List<GameObject>();
-        //foreach (var value in poolBullet)
-        //{
-        //    foreach (var item in value.Value)
-        //        all1.Add(item);
-        //}
+        var listNumber = new List<GameObject>();
+        foreach (var value in poolBullet)
+        {
+            foreach (var item in value.Value)
+                listNumber.Add(item);
+        }
 
-
-        //Debug.Log(bullets[0].name.ToString());
-        //Debug.Log(all1.Count);
-        //Debug.Log(bul);
-
+        bool isActive = false;
         for (int i = 0; i < poolBullet[bul].Count; i++)
         {
+
             if (!poolBullet[bul][i].activeInHierarchy)
             {
+               isActive = true;
                return poolBullet[bul][i];
             }
         }
+        //if (!isActive)
+        //{
+        //    amountPool++;
+        //    var go = Instantiate(bullets[poolBullet[bul].], transform.position, Quaternion.identity);
+        //    go.transform.SetParent(transform);
+        //    go.SetActive(false);
+        //    poolBullet[bul][amountPool-1].
+        //}
         return null;
     }
     public void InvokeEvent(GameObject gam)
@@ -74,6 +67,7 @@ public class BulletsManager : Singleton<BulletsManager>
     private void ResetBullet(GameObject gam)
     {
         gam.SetActive(false);
-        gam = default;
+       
+        Debug.Log("Hi");
     }
 }
