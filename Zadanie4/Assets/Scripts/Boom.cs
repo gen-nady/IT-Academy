@@ -26,7 +26,7 @@ public class Boom : MonoBehaviour
                     AudioManager.Instanse.OnBoom();
                 }
             }
-            gameObject.SetActive(false);
+            BulletsManager.Instanse.InvokeEvent(gameObject);
         }
     }
 }
