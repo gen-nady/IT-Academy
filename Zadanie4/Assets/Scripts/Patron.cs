@@ -27,8 +27,8 @@ public class Patron : BulletsName
             onShootEvent?.Invoke();
         }
     }
-    public void ResetBullet()
-    {
-        gameObject.SetActive(false);
-    }
+    //public void ResetBullet()
+    //{
+    //    gameObject.SetActive(false);
+    //}
 }

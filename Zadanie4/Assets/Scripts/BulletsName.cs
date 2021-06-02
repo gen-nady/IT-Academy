@@ -8,4 +8,8 @@ public abstract class BulletsName : MonoBehaviour
     {
         bullets = 0, granate, bounce
     }
+    public virtual void ResetBullet()
+    {
+        gameObject.SetActive(false);
+    }
 }
