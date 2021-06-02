@@ -6,15 +6,11 @@ using UnityEngine.Events;
 using System;
 public class BulletsManager : Singleton<BulletsManager>
 {
-    public int amountPool = 20;
+    public int amountPool = 3;
     public GameObject[] bullets;
-    public delegate void OnShoot();
+    
 
-    public enum nameBullets
-    {
-        bullets = 0, granate, bounce
-    }
-    Dictionary<nameBullets, List<GameObject>> poolBullet = new Dictionary<nameBullets, List<GameObject>>();
+    Dictionary<BulletsName.nameBullets, List<GameObject>> poolBullet = new Dictionary<BulletsName.nameBullets, List<GameObject>>();
 
 
     private void Awake()
@@ -25,36 +21,41 @@ public class BulletsManager : Singleton<BulletsManager>
             for (int j = 0; j < amountPool; j++)
             {
                 var go = Instantiate(bullets[i], transform.position, Quaternion.identity);
+               
                 go.transform.SetParent(transform);
                 go.SetActive(false);
                 pool.Add(go);
             }
-            poolBullet.Add((nameBullets)i, pool);
+            poolBullet.Add((BulletsName.nameBullets)i, pool);
         }
     }
 
 
-    public GameObject GetPool(nameBullets bul)
+    public GameObject GetPool(BulletsName.nameBullets bul)
     {
-        //bool isActive = false;
+        bool isActive = false;
         for (int i = 0; i < poolBullet[bul].Count; i++)
         {
             if (!poolBullet[bul][i].activeInHierarchy)
             {
-                //isActive = true;
+                isActive = true;
 
                 return poolBullet[bul][i];
             }
         }
-        //if (!isActive)
-        //{
-        //    amountPool++;
-        //    var go = Instantiate(bullets[poolBullet[bul].], transform.position, Quaternion.identity);
-        //    go.transform.SetParent(transform);
-        //    go.SetActive(false);
-        //    poolBullet[bul][amountPool - 1].
-        //}
-        return null;
+        if (!isActive)
+        {
+            var go = Instantiate(bullets[(int)bul], transform.position, Quaternion.identity);
+            go.transform.SetParent(transform);
+            go.SetActive(false);
+            poolBullet[bul].Add(go);
+            return go;
+        }
+        var goo = Instantiate(bullets[0], transform.position, Quaternion.identity);
+        goo.transform.SetParent(transform);
+        goo.SetActive(false);
+        return goo;
+
     }
 
 }

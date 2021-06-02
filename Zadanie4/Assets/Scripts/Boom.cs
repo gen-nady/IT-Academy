@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boom : MonoBehaviour
+public class Boom : BulletsName
 {
+    public  nameBullets nameBul;
     public float radius = 5.0F;
     public float power = 10.0F;
     public GameObject boomEffect;

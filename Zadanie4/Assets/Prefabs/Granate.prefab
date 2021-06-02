@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f33808369c2f34a94e207044d97618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameBul: 1
   radius: 50
   power: 1000
   boomEffect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}

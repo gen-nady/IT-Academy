@@ -11,7 +11,7 @@ public class InstanceBullet : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            GameObject go = BulletsManager.Instanse.GetPool(BulletsManager.nameBullets.bullets);
+            GameObject go = BulletsManager.Instanse.GetPool(BulletsName.nameBullets.bullets);
             go.transform.position = shootPosition.position;
             go.SetActive(true);
             go.GetComponent<Rigidbody>().velocity = shootPosition.forward * speedBullet;
@@ -19,14 +19,14 @@ public class InstanceBullet : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-            GameObject go = BulletsManager.Instanse.GetPool(BulletsManager.nameBullets.granate);
+            GameObject go = BulletsManager.Instanse.GetPool(BulletsName.nameBullets.granate);
             go.transform.position = shootPosition.position;
             go.SetActive(true);
             go.GetComponent<Rigidbody>().AddForce(shootPosition.forward * speedBullet, ForceMode.Impulse);
         }
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            GameObject go = BulletsManager.Instanse.GetPool(BulletsManager.nameBullets.bounce);
+            GameObject go = BulletsManager.Instanse.GetPool(BulletsName.nameBullets.bounce);
             go.transform.position = shootPosition.position;
             go.SetActive(true);
             go.GetComponent<Rigidbody>().velocity = shootPosition.forward * speedBullet;
