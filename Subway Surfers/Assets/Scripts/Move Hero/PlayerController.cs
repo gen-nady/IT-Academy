@@ -17,9 +17,9 @@ public class PlayerController : MonoBehaviour
     {
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundCheckLayer);
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundCheckLayer);
         int horizontal = 0;
         int vertical = 0;
         if (Input.touchCount > 0)
