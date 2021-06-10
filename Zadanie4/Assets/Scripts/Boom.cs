@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Boom : BulletsName
 {
-    public  nameBullets nameBul;
     public float radius = 5.0F;
     public float power = 10.0F;
     public GameObject boomEffect;
@@ -27,7 +26,7 @@ public class Boom : BulletsName
                     AudioManager.Instanse.OnBoom();
                 }
             }
-            //BulletsManager.Instanse.InvokeEvent(gameObject);
+            CallInvoke();
         }
     }
 }

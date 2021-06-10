@@ -11,24 +11,24 @@ public class InstanceBullet : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            GameObject go = BulletsManager.Instanse.GetPool(BulletsName.nameBullets.bullets);
+            BulletsName go = BulletsManager.Instanse.GetBullets(BulletsName.nameBullets.bullets);
             go.transform.position = shootPosition.position;
-            go.SetActive(true);
+            go.gameObject.SetActive(true);
             go.GetComponent<Rigidbody>().velocity = shootPosition.forward * speedBullet;
             AudioManager.Instanse.OnShoot();
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-            GameObject go = BulletsManager.Instanse.GetPool(BulletsName.nameBullets.granate);
+            BulletsName go = BulletsManager.Instanse.GetBullets(BulletsName.nameBullets.granate);
             go.transform.position = shootPosition.position;
-            go.SetActive(true);
+            go.gameObject.SetActive(true);
             go.GetComponent<Rigidbody>().AddForce(shootPosition.forward * speedBullet, ForceMode.Impulse);
         }
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            GameObject go = BulletsManager.Instanse.GetPool(BulletsName.nameBullets.bounce);
+            BulletsName go = BulletsManager.Instanse.GetBullets(BulletsName.nameBullets.bounce);
             go.transform.position = shootPosition.position;
-            go.SetActive(true);
+            go.gameObject.SetActive(true);
             go.GetComponent<Rigidbody>().velocity = shootPosition.forward * speedBullet;
         }
     }

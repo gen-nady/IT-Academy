@@ -6,56 +6,53 @@ using UnityEngine.Events;
 using System;
 public class BulletsManager : Singleton<BulletsManager>
 {
-    public int amountPool = 3;
-    public GameObject[] bullets;
-    
-
-    Dictionary<BulletsName.nameBullets, List<GameObject>> poolBullet = new Dictionary<BulletsName.nameBullets, List<GameObject>>();
-
-
+    public int countPool = 20;
+    public BulletsName[] bulletsPrefab;
+    Dictionary<BulletsName.nameBullets, List<BulletsName>> poolBullets = new Dictionary<BulletsName.nameBullets, List<BulletsName>>();
     private void Awake()
     {
-        for (int i = 0; i < bullets.Length; i++)
+        for (int i = 0; i < bulletsPrefab.Length; i++)
         {
-            List<GameObject> pool = new List<GameObject>();
-            for (int j = 0; j < amountPool; j++)
+            List<BulletsName> pool = new List<BulletsName>();
+            for (int j = 0; j < countPool; j++)
             {
-                var go = Instantiate(bullets[i], transform.position, Quaternion.identity);
-               
+                var go = Instantiate(bulletsPrefab[i], transform.position, Quaternion.identity);
                 go.transform.SetParent(transform);
-                go.SetActive(false);
+                go.gameObject.SetActive(false);
                 pool.Add(go);
             }
-            poolBullet.Add((BulletsName.nameBullets)i, pool);
+            poolBullets.Add(bulletsPrefab[i].nameBul, pool);
         }
     }
 
-
-    public GameObject GetPool(BulletsName.nameBullets bul)
+    public BulletsName GetBullets(BulletsName.nameBullets bul)
     {
-        bool isActive = false;
-        for (int i = 0; i < poolBullet[bul].Count; i++)
+        for (int i = 0; i < poolBullets[bul].Count; i++)
         {
-            if (!poolBullet[bul][i].activeInHierarchy)
+            if (!poolBullets[bul][i].gameObject.activeInHierarchy)
             {
-                isActive = true;
-
-                return poolBullet[bul][i];
+                poolBullets[bul][i].eventBullet += ResetBullet;
+                return poolBullets[bul][i];
             }
         }
-        if (!isActive)
+
+        BulletsName bullets = null;
+        for (int i = 0; i < bulletsPrefab.Length; i++)
         {
-            var go = Instantiate(bullets[(int)bul], transform.position, Quaternion.identity);
-            go.transform.SetParent(transform);
-            go.SetActive(false);
-            poolBullet[bul].Add(go);
-            return go;
+            if (bulletsPrefab[i].nameBul == bul)
+                bullets = bulletsPrefab[i];
         }
-        var goo = Instantiate(bullets[0], transform.position, Quaternion.identity);
-        goo.transform.SetParent(transform);
-        goo.SetActive(false);
-        return goo;
 
+        BulletsName go = Instantiate(bullets, transform.position, Quaternion.identity);
+        go.transform.SetParent(transform);
+        go.gameObject.SetActive(false);
+        poolBullets[bul].Add(go);
+        return go;
+    
     }
-
+    public void ResetBullet(BulletsName gam)
+    {
+        gam.gameObject.SetActive(false);
+        gam.eventBullet -= ResetBullet;
+    }
 }
