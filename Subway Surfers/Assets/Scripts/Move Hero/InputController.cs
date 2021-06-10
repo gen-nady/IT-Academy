@@ -7,9 +7,6 @@ public class InputController : MonoBehaviour
     private Vector2 touchOrigin;
     public int CheckInput()
     {
-#if PLATFORM_ANDROID
-        int horizontal = 0;
-        int vertical = 0;
         if (Input.touchCount > 0)
         {
             Touch myTouch = Input.touches[0];
@@ -25,24 +22,22 @@ public class InputController : MonoBehaviour
                 touchOrigin.x = -1;
                 if (Mathf.Abs(x) > Mathf.Abs(y))
                 {
-                    horizontal = x > 0 ? 0 : 1;
-                    return horizontal;
+                    return  x > 0 ? 0 : 1; 
                 }
                 else
                 {
-                    vertical = y > 0 ? 2 : 3;
-                    return vertical;
-                }
-                
+                    return y > 0 ? 2 : 3; 
+                }            
             }
         }
         if (Input.GetKeyDown(KeyCode.W))
             return 2;
         if (Input.GetKeyDown(KeyCode.S))
             return 3;
-        
-        return 0;
-#endif  
-
+        if (Input.GetKeyDown(KeyCode.A))
+            return 1;
+        if (Input.GetKeyDown(KeyCode.D))
+            return 0;
+        return 5;
     }
 }

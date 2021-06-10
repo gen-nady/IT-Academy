@@ -19,7 +19,27 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4fe7e12f-b771-4989-a190-40e2ef463ed3" name="Default Changelist" comment="" />
+    <list default="true" id="4fe7e12f-b771-4989-a190-40e2ef463ed3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Move Hero/InputController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Move Hero/InputController.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/Ball.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/Ball.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Subway Surfers/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Subway Surfers/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Subway Surfers/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Subway Surfers/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Move Hero/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Move Hero/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Zadanie4/Assets/Prefabs/Ball.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie4/Assets/Prefabs/Ball.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Zadanie4/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie4/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/Boom.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/Boom.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/BulletsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/BulletsManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/BulletsName.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/BulletsName.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/InstanceBullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/InstanceBullet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/MoveRobot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/MoveRobot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/Patron.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/Bullet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/Patron.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/Bullet.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/Singleton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Zadanie4/Assets/Scripts/Singleton.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,6 +60,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Move Hero/HeroDuckingState.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Move Hero/HeroIdleState.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Move Hero/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Move Hero/InputController.cs" />
       </list>
     </option>
   </component>
@@ -83,6 +104,7 @@
       <option name="presentableId" value="Default" />
       <updated>1623223110893</updated>
       <workItem from="1623223112506" duration="3172000" />
+      <workItem from="1623315837603" duration="944000" />
     </task>
     <servers />
   </component>
@@ -98,6 +120,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
