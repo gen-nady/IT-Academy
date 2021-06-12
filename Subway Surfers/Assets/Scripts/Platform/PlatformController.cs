@@ -15,4 +15,17 @@ public class PlatformController : MonoBehaviour
     {
         transform.Translate(directionPlatform * speedPlatform * Time.deltaTime);
     }
+
+
+    private void OnTriggerExit(Collider coll)
+    {
+        if (coll.gameObject.CompareTag("StartPosition"))
+        {
+            PlatformManager.Instanse.EmergingPlatform();
+        }
+        if (coll.gameObject.CompareTag("EndPosition"))
+        {
+            PlatformManager.Instanse.DisablePlatform(this); 
+        }
+    }
 }

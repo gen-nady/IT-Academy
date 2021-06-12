@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
+    
     private Vector2 touchOrigin;
     public int CheckInput()
     {

@@ -16,13 +16,14 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        inputController = new InputController();
+
+        inputController = GetComponent<InputController>();
     }
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundCheckLayer);
         int input = inputController.CheckInput();
-        if (input == 2 && isGrounded)
+        if (input == 2 && isGrounded) //под case
         {
             Jump();
         }
