@@ -6,6 +6,7 @@ TagManager:
   tags:
   - StartPosition
   - EndPosition
+  - GameOver
   layers:
   - Default
   - TransparentFX

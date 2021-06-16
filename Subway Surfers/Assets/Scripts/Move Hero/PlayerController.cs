@@ -13,34 +13,33 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public CapsuleCollider cpsCollider;
     public float forceJump = 375f;
-
     void Start()
     {
-
         inputController = GetComponent<InputController>();
     }
     void Update()
-    {
+    {  
         isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundCheckLayer);
-        int input = inputController.CheckInput();
-        if (input == 2 && isGrounded) //под case
+        var input = inputController.CheckInput();
+        switch (input)
         {
-            Jump();
-        }
-        if (input == 3)
-        {
-            Down();
-        }
-        if (input == 0)
-        {
-            Right();
-        }
-        if (input == 1)
-        {
-            Left();
-        }
+            case InputController.movePlayer.up:
+                if (isGrounded) 
+                {
+                    Jump();
+                }
+                break;
+            case InputController.movePlayer.down:
+                Down();
+                break;
+            case InputController.movePlayer.right:
+                Right();
+                break;
+            case InputController.movePlayer.left:
+                Left();
+                break;
+        }    
     }
-
     void Jump()
     {
         rb.AddForce(new Vector3(0f, forceJump, 0f), ForceMode.Impulse);

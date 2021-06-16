@@ -5,52 +5,57 @@ using UnityEngine;
 public class PlatformManager : Singleton<PlatformManager>
 {
     public PlatformController[] platforms;
-    List<PlatformController> poolPlatform;
+    Dictionary<PlatformController.lvlDifficult, List<PlatformController>> poolPlatform;
     public Transform startPositionPlatform;
-    public bool isActivateNewPlatform;
-    public bool isDisablePlatform;
-
     private void Awake()
     {
-        List<PlatformController> platform = new List<PlatformController>();
+        poolPlatform = new Dictionary<PlatformController.lvlDifficult, List<PlatformController>>();
+        List <PlatformController> platformEasy = new List<PlatformController>();
+        List<PlatformController> platformMedium = new List<PlatformController>();
+        List<PlatformController> platformHard = new List<PlatformController>();
         for (int i = 0; i < platforms.Length; i++)
         {
             var platf = Instantiate(platforms[i], startPositionPlatform);
             platf.gameObject.SetActive(false);
             platf.gameObject.transform.SetParent(transform);
-            platform.Add(platf);
+            if (platf.lvl == PlatformController.lvlDifficult.easy)
+                platformEasy.Add(platf);        
+            if (platf.lvl == PlatformController.lvlDifficult.medium)
+                platformMedium.Add(platf);
+            if (platf.lvl == PlatformController.lvlDifficult.hard)
+                platformHard.Add(platf);
         }
-        poolPlatform = platform;
+        poolPlatform.Add(PlatformController.lvlDifficult.easy, platformEasy);
+        poolPlatform.Add(PlatformController.lvlDifficult.medium, platformMedium);
+        poolPlatform.Add(PlatformController.lvlDifficult.hard, platformHard);
     }
     private void Update()
     {
-        EmergingPlatform();
+
     }
-    public PlatformController GetPlatform()
+    public PlatformController GetPlatform(PlatformController.lvlDifficult lvl)
     {
         List<PlatformController> notActivePlatform = new List<PlatformController>();
-        for (int i = 0; i < poolPlatform.Count; i++)
+        for (int i = 0; i < poolPlatform[lvl].Count; i++)
         {
-            if (!poolPlatform[i].gameObject.activeInHierarchy)
+            if (!poolPlatform[lvl][i].gameObject.activeInHierarchy)
             {
-                notActivePlatform.Add(poolPlatform[i]);
+                notActivePlatform.Add(poolPlatform[lvl][i]);
             }
         }
-        int random = Random.Range(0, notActivePlatform.Count - 1);
+        int random = Random.Range(0, notActivePlatform.Count);
         return notActivePlatform[random];
     }
-    public void EmergingPlatform()
+    public void EmergingPlatform(PlatformController.lvlDifficult lvl)
     {
-        isActivateNewPlatform = false;
-        PlatformController platf = GetPlatform();
-        platf.transform.position = new Vector3(startPositionPlatform.position.x - 50f,
+        float startPosition = 49.8f;
+        PlatformController platf = GetPlatform(lvl);
+        platf.transform.position = new Vector3(startPositionPlatform.position.x + startPosition,
             startPositionPlatform.position.y, startPositionPlatform.position.z);
         platf.gameObject.SetActive(true);
     }
     public void DisablePlatform(PlatformController platf)
     {
         platf.gameObject.SetActive(false);
-
-
     }
 }

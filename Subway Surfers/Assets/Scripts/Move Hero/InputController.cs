@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    
+
     private Vector2 touchOrigin;
-    public int CheckInput()
+  
+    public enum movePlayer { left, right, up, down, nul }   
+    public movePlayer CheckInput()
     {
         if (Input.touchCount > 0)
         {
@@ -23,22 +25,22 @@ public class InputController : MonoBehaviour
                 touchOrigin.x = -1;
                 if (Mathf.Abs(x) > Mathf.Abs(y))
                 {
-                    return  x > 0 ? 0 : 1; 
+                    return x > 0 ? movePlayer.left : movePlayer.right;
                 }
                 else
                 {
-                    return y > 0 ? 2 : 3; 
-                }            
+                    return y > 0 ? movePlayer.up : movePlayer.down;
+                }
             }
         }
         if (Input.GetKeyDown(KeyCode.W))
-            return 2;
+            return movePlayer.up;
         if (Input.GetKeyDown(KeyCode.S))
-            return 3;
+            return movePlayer.down;
         if (Input.GetKeyDown(KeyCode.A))
-            return 1;
+            return movePlayer.left;
         if (Input.GetKeyDown(KeyCode.D))
-            return 0;
-        return 5;
+            return movePlayer.right;
+        return movePlayer.nul;
     }
 }

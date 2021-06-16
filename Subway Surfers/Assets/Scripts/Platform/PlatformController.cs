@@ -6,7 +6,12 @@ public class PlatformController : MonoBehaviour
 {
     public float speedPlatform;
     Vector3 directionPlatform;
+    public lvlDifficult lvl;
+    public enum lvlDifficult
+    {
+        easy, medium, hard
 
+    }
     void Awake()
     {
         directionPlatform = new Vector3(-1f, 0f, 0f);
@@ -16,16 +21,15 @@ public class PlatformController : MonoBehaviour
         transform.Translate(directionPlatform * speedPlatform * Time.deltaTime);
     }
 
-
     private void OnTriggerExit(Collider coll)
     {
         if (coll.gameObject.CompareTag("StartPosition"))
         {
-            PlatformManager.Instanse.EmergingPlatform();
+            PlatformManager.Instanse.EmergingPlatform(lvlDifficult.easy);
         }
         if (coll.gameObject.CompareTag("EndPosition"))
         {
-            PlatformManager.Instanse.DisablePlatform(this); 
+            PlatformManager.Instanse.DisablePlatform(this);
         }
     }
 }
