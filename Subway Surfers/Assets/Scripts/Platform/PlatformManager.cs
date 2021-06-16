@@ -10,24 +10,15 @@ public class PlatformManager : Singleton<PlatformManager>
     private void Awake()
     {
         poolPlatform = new Dictionary<PlatformController.lvlDifficult, List<PlatformController>>();
-        List <PlatformController> platformEasy = new List<PlatformController>();
-        List<PlatformController> platformMedium = new List<PlatformController>();
-        List<PlatformController> platformHard = new List<PlatformController>();
         for (int i = 0; i < platforms.Length; i++)
         {
             var platf = Instantiate(platforms[i], startPositionPlatform);
             platf.gameObject.SetActive(false);
             platf.gameObject.transform.SetParent(transform);
-            if (platf.lvl == PlatformController.lvlDifficult.easy)
-                platformEasy.Add(platf);        
-            if (platf.lvl == PlatformController.lvlDifficult.medium)
-                platformMedium.Add(platf);
-            if (platf.lvl == PlatformController.lvlDifficult.hard)
-                platformHard.Add(platf);
+            if (!poolPlatform.ContainsKey(platf.lvl))
+                poolPlatform.Add(platf.lvl, new List<PlatformController>());
+            poolPlatform[platf.lvl].Add(platf);
         }
-        poolPlatform.Add(PlatformController.lvlDifficult.easy, platformEasy);
-        poolPlatform.Add(PlatformController.lvlDifficult.medium, platformMedium);
-        poolPlatform.Add(PlatformController.lvlDifficult.hard, platformHard);
     }
     private void Update()
     {

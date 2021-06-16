@@ -13,18 +13,25 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public CapsuleCollider cpsCollider;
     public float forceJump = 375f;
+    public Transform tr
+    {
+        get
+        {
+            return transform; 
+        }
+    }
     void Start()
     {
         inputController = GetComponent<InputController>();
     }
     void Update()
-    {  
+    {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundCheckLayer);
         var input = inputController.CheckInput();
         switch (input)
         {
             case InputController.movePlayer.up:
-                if (isGrounded) 
+                if (isGrounded)
                 {
                     Jump();
                 }
@@ -38,26 +45,26 @@ public class PlayerController : MonoBehaviour
             case InputController.movePlayer.left:
                 Left();
                 break;
-        }    
+        }
     }
     void Jump()
     {
         rb.AddForce(new Vector3(0f, forceJump, 0f), ForceMode.Impulse);
     }
     void Down()
-    {
-        transform.localScale = new Vector3(1f, 0.5f, 1f);
+    { 
+        tr.localScale = new Vector3(1f, 0.5f, 1f);
     }
     void Right()
     {
         float rightBand = -4f;
-        if (transform.position.z > rightBand)
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + rightBand);
+        if (tr.position.z > rightBand)
+            tr.Translate(0f, 0f, rightBand);
     }
     void Left()
     {
         float leftBand = 4f;
-        if (transform.position.z < leftBand)
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + leftBand);
+        if (tr.position.z < leftBand)
+            tr.Translate(0f, 0f, leftBand);
     }
 }
