@@ -25,7 +25,7 @@ public class InputController : MonoBehaviour
                 touchOrigin.x = -1;
                 if (Mathf.Abs(x) > Mathf.Abs(y))
                 {
-                    return x > 0 ? movePlayer.left : movePlayer.right;
+                    return x > 0 ? movePlayer.right : movePlayer.left;
                 }
                 else
                 {

@@ -7,6 +7,7 @@ public class PlatformManager : Singleton<PlatformManager>
     public PlatformController[] platforms;
     Dictionary<PlatformController.lvlDifficult, List<PlatformController>> poolPlatform;
     public Transform startPositionPlatform;
+    public GameObject[] lets;
     private void Awake()
     {
         poolPlatform = new Dictionary<PlatformController.lvlDifficult, List<PlatformController>>();
@@ -37,12 +38,17 @@ public class PlatformManager : Singleton<PlatformManager>
         int random = Random.Range(0, notActivePlatform.Count);
         return notActivePlatform[random];
     }
-    public void EmergingPlatform(PlatformController.lvlDifficult lvl)
+    public void EmergingPlatform()
     {
+        PlatformController.lvlDifficult lvl = (PlatformController.lvlDifficult)Random.Range(0,3);
         float startPosition = 49.8f;
         PlatformController platf = GetPlatform(lvl);
         platf.transform.position = new Vector3(startPositionPlatform.position.x + startPosition,
             startPositionPlatform.position.y, startPositionPlatform.position.z);
+        for (int i = 0; i < platf.gameObject.transform.childCount; i++)
+        {
+            platf.gameObject.transform.GetChild(i).gameObject.SetActive(true);
+        }
         platf.gameObject.SetActive(true);
     }
     public void DisablePlatform(PlatformController platf)

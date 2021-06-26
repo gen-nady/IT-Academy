@@ -25,7 +25,7 @@ public class PlatformController : MonoBehaviour
     {
         if (coll.gameObject.CompareTag("StartPosition"))
         {
-            PlatformManager.Instanse.EmergingPlatform(lvlDifficult.easy);
+            PlatformManager.Instanse.EmergingPlatform();
         }
         if (coll.gameObject.CompareTag("EndPosition"))
         {

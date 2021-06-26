@@ -13,11 +13,13 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public CapsuleCollider cpsCollider;
     public float forceJump = 375f;
+    int score = 0;
+    int coin = 0;
     public Transform tr
     {
         get
         {
-            return transform; 
+            return transform;
         }
     }
     void Start()
@@ -52,19 +54,34 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(new Vector3(0f, forceJump, 0f), ForceMode.Impulse);
     }
     void Down()
-    { 
-        tr.localScale = new Vector3(1f, 0.5f, 1f);
+    {
+        rb.AddForce(new Vector3(0f, -forceJump * 2, 0f), ForceMode.Impulse);
     }
     void Right()
     {
         float rightBand = -4f;
-        if (tr.position.z > rightBand)
+        if (tr.position.z > rightBand && !Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y,
+            transform.position.z + rightBand), 0.1f))
             tr.Translate(0f, 0f, rightBand);
     }
     void Left()
     {
         float leftBand = 4f;
-        if (tr.position.z < leftBand)
+        if (tr.position.z < leftBand && !Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y,
+            transform.position.z + leftBand), 0.1f))
             tr.Translate(0f, 0f, leftBand);
+    }
+
+    [System.Obsolete]
+    private void OnTriggerEnter(Collider coll)
+    {
+        if (coll.CompareTag("GameOver"))
+        {
+            Application.LoadLevel(0);
+        }
+        if (coll.CompareTag("Coin"))
+        {
+            coll.gameObject.SetActive(false);
+        }
     }
 }
