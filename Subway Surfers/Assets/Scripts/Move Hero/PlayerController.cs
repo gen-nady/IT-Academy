@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     InputController inputController;
-    private bool isGrounded;
-    public Transform groundCheck;
-    private float groundRadius = 0.2f;
-    public LayerMask groundCheckLayer;
-    public Rigidbody rb;
-    public CapsuleCollider cpsCollider;
-    public float forceJump = 375f;
+
+    [Header("Прыжок")]
+    [SerializeField]
+    Transform groundCheck;
+    [SerializeField]
+    LayerMask groundCheckLayer;
+    [Tooltip("Rigibody Player")]
+    [SerializeField]
+    Rigidbody rb;
+    [SerializeField]
+    float forceJump;
+    float groundRadius = 0.2f;
+    bool isGrounded;
     public Transform tr
     {
         get
@@ -75,7 +80,7 @@ public class PlayerController : MonoBehaviour
     {
         if (coll.CompareTag("GameOver"))
         {
-            GameManager.Instanse.RestartLvl();
+            GameManager.Instanse.DeadPlayer();
         }
         if (coll.CompareTag("Coin"))
         {

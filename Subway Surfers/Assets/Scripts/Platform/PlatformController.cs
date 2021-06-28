@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class PlatformController : MonoBehaviour
 {
-    public float speedPlatform;
-    Vector3 directionPlatform;
+    [Tooltip("Сложность платформы")]
     public lvlDifficult lvl;
+    [Tooltip("Скорость плафтормы")]
+    [SerializeField]
+    float speedPlatform;
+    Vector3 directionPlatform; 
     public enum lvlDifficult
     {
         easy, medium, hard

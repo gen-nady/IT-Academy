@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class PlatformManager : Singleton<PlatformManager>
 {
-    public PlatformController[] platforms;
+    [Tooltip("Платформы")]
+    [SerializeField]
+    PlatformController[] platforms;
+
     Dictionary<PlatformController.lvlDifficult, List<PlatformController>> poolPlatform;
-    public Transform startPositionPlatform;
+
+    [Tooltip("Стартовая позиция платформы")]
+    [SerializeField]
+    Transform startPositionPlatform;
     private void Awake()
     {
         poolPlatform = new Dictionary<PlatformController.lvlDifficult, List<PlatformController>>();
@@ -20,11 +26,7 @@ public class PlatformManager : Singleton<PlatformManager>
             poolPlatform[platf.lvl].Add(platf);
         }
     }
-    private void Update()
-    {
-
-    }
-    public PlatformController GetPlatform(PlatformController.lvlDifficult lvl)
+    PlatformController GetPlatform(PlatformController.lvlDifficult lvl)
     {
         List<PlatformController> notActivePlatform = new List<PlatformController>();
         for (int i = 0; i < poolPlatform[lvl].Count; i++)
@@ -39,12 +41,10 @@ public class PlatformManager : Singleton<PlatformManager>
     }
     public void HidePlatform()
     {
-        GameManager.Instanse.startPlatform.gameObject.SetActive(false);
+        GameManager.Instanse.startPlatform.gameObject.SetActive(false); //временное решение со стартовой плаформой. Потом будет обычная сразу со старта
         for (PlatformController.lvlDifficult lvl = PlatformController.lvlDifficult.easy;
             lvl <= PlatformController.lvlDifficult.hard; lvl++)
         {
-            Debug.Log(lvl);
-            Debug.Log(poolPlatform[lvl].Count);
             for (int i = 0; i < poolPlatform[lvl].Count; i++)
             {
                 if (poolPlatform[lvl][i].gameObject.activeInHierarchy)
