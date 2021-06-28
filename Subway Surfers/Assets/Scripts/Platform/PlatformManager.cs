@@ -40,7 +40,7 @@ public class PlatformManager : Singleton<PlatformManager>
     }
     public void EmergingPlatform()
     {
-        PlatformController.lvlDifficult lvl = (PlatformController.lvlDifficult)Random.Range(0,3);
+        PlatformController.lvlDifficult lvl = (PlatformController.lvlDifficult)Random.Range(0,2);
         float startPosition = 49.8f;
         PlatformController platf = GetPlatform(lvl);
         platf.transform.position = new Vector3(startPositionPlatform.position.x + startPosition,
