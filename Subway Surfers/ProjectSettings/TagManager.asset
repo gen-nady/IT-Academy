@@ -8,6 +8,9 @@ TagManager:
   - EndPosition
   - GameOver
   - Coin
+  - Score
+  - Jump
+  - Magnet
   layers:
   - Default
   - TransparentFX

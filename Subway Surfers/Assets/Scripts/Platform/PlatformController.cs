@@ -7,13 +7,10 @@ public class PlatformController : MonoBehaviour
     [Tooltip("Сложность платформы")]
     public lvlDifficult lvl;
     [Tooltip("Скорость плафтормы")]
-    [SerializeField]
-    float speedPlatform;
     Vector3 directionPlatform; 
     public enum lvlDifficult
     {
         easy, medium, hard
-
     }
     void Awake()
     {
@@ -21,14 +18,14 @@ public class PlatformController : MonoBehaviour
     }
     void Update()
     {
-        transform.Translate(directionPlatform * speedPlatform * Time.deltaTime);
+        transform.Translate(directionPlatform * PlatformManager.Instanse.speedPlatform * Time.deltaTime);
     }
 
     private void OnTriggerExit(Collider coll)
     {
         if (coll.gameObject.CompareTag("StartPosition"))
         {
-            PlatformManager.Instanse.EmergingPlatform();
+            PlatformManager.Instanse.EmergingPlatform();          
         }
         if (coll.gameObject.CompareTag("EndPosition"))
         {

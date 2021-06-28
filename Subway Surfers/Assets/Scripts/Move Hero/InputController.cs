@@ -6,7 +6,7 @@ public class InputController : MonoBehaviour
 {
     Vector2 touchOrigin;
 
-    public enum movePlayer { left, right, up, down }
+    public enum movePlayer { left, right, up, down, nul }
     public movePlayer CheckInput()
     {
         if (Input.touchCount > 0)
@@ -40,6 +40,6 @@ public class InputController : MonoBehaviour
             return movePlayer.left;
         if (Input.GetKeyDown(KeyCode.D))
             return movePlayer.right;
-        return movePlayer.up;
+        return movePlayer.nul;
     }
 }

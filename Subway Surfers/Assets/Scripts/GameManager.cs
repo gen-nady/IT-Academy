@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GameManager : Singleton<GameManager>
 {
-    [Header("Старотовая дорога")]
+    [Header("Старотовая дорога")]//временное решение
     public PlatformController startPlatform;
 
     [Header("Компоненты Text")]
@@ -22,7 +22,10 @@ public class GameManager : Singleton<GameManager>
     GameObject pausePanel;
     [SerializeField]
     GameObject deadPanel;
+    [Header("Время действия бонусов")]
 
+    public int waitUpgrade = 30;
+    int factorScore = 1;
     int coin = 0;
     int score = 0;
 
@@ -33,7 +36,7 @@ public class GameManager : Singleton<GameManager>
 
     void FixedUpdate()
     {
-        score += 1;
+        score += factorScore;
         scoreText.text = score.ToString();
     }
     public void ChangeCoin()
@@ -73,19 +76,29 @@ public class GameManager : Singleton<GameManager>
         {
             deadScoreText.text = "Score:\n" + score.ToString();
         }
-
     }
     public void RestartLvl()
     {
+        for (int i = 0; i < startPlatform.gameObject.transform.childCount; i++) //временное решение
+        {
+            startPlatform.gameObject.transform.GetChild(i).gameObject.SetActive(true);
+        }
         Time.timeScale = 1;
-        PlatformManager.Instanse.HidePlatform();
+        PlatformManager.Instanse.ReloadPlatform();
         deadPanel.SetActive(false);
         startPlatform.transform.position = platformStartPosition;
         startPlatform.gameObject.SetActive(true);
         player.transform.position = playerStartPosition;
+        player.factorForceJump = 1f;
         coin = 0;
         score = 0;
         scoreText.text = null;
         coinText.text = null;
+    }
+    public IEnumerator DoubleScore()
+    {
+        factorScore = 2;
+        yield return new WaitForSeconds(waitUpgrade);
+        factorScore = 1;
     }
 }

@@ -20,14 +20,18 @@ public class PlayerController : MonoBehaviour
     float forceJump;
     float groundRadius = 0.2f;
     bool isGrounded;
-    public Transform tr
+    [HideInInspector]
+    public float factorForceJump = 1f;
+    [HideInInspector]
+    public bool isMagnet = false;
+    Transform tr
     {
         get
         {
             return transform;
         }
     }
-    void Start()
+    void Awake()
     {
         inputController = GetComponent<InputController>();
     }
@@ -56,7 +60,7 @@ public class PlayerController : MonoBehaviour
     }
     void Jump()
     {
-        rb.AddForce(new Vector3(0f, forceJump, 0f), ForceMode.Impulse);
+        rb.AddForce(new Vector3(0f, forceJump*factorForceJump, 0f), ForceMode.Impulse);
     }
     void Down()
     {
@@ -76,8 +80,19 @@ public class PlayerController : MonoBehaviour
             transform.position.z + leftBand), 0.1f))
             tr.Translate(0f, 0f, leftBand);
     }
+    IEnumerator HighJumping()
+    {
+        factorForceJump = 1.6f;
+        yield return new WaitForSeconds(GameManager.Instanse.waitUpgrade);
+        factorForceJump = 1f;
+    }
+    IEnumerator Magnet()
+    {
+        isMagnet = true;
+        yield return new WaitForSeconds(GameManager.Instanse.waitUpgrade);
+        isMagnet = false;
+    }
 
-    [System.Obsolete]
     private void OnTriggerEnter(Collider coll)
     {
         if (coll.CompareTag("GameOver"))
@@ -88,6 +103,21 @@ public class PlayerController : MonoBehaviour
         {
             coll.gameObject.SetActive(false);
             GameManager.Instanse.ChangeCoin();
+        }
+        if (coll.CompareTag("Score"))
+        {
+            StartCoroutine(GameManager.Instanse.DoubleScore());
+            coll.gameObject.SetActive(false);
+        }
+        if (coll.CompareTag("Jump"))
+        {
+            StartCoroutine(HighJumping());
+            coll.gameObject.SetActive(false);
+        }
+        if (coll.CompareTag("Magnet"))
+        {
+            StartCoroutine(Magnet());
+            coll.gameObject.SetActive(false);
         }
     }
 }

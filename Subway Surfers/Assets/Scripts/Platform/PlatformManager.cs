@@ -13,6 +13,13 @@ public class PlatformManager : Singleton<PlatformManager>
     [Tooltip("Стартовая позиция платформы")]
     [SerializeField]
     Transform startPositionPlatform;
+
+    [Tooltip("Скорость платформ")]
+    public float speedPlatform = 10;
+
+    int countGetPlatform = 2;
+
+
     private void Awake()
     {
         poolPlatform = new Dictionary<PlatformController.lvlDifficult, List<PlatformController>>();
@@ -26,6 +33,7 @@ public class PlatformManager : Singleton<PlatformManager>
             poolPlatform[platf.lvl].Add(platf);
         }
     }
+
     PlatformController GetPlatform(PlatformController.lvlDifficult lvl)
     {
         List<PlatformController> notActivePlatform = new List<PlatformController>();
@@ -39,8 +47,20 @@ public class PlatformManager : Singleton<PlatformManager>
         int random = Random.Range(0, notActivePlatform.Count);
         return notActivePlatform[random];
     }
-    public void HidePlatform()
+    void ChangePlatformSpeed()
     {
+        countGetPlatform--;
+        if (countGetPlatform == 0)
+        {
+            countGetPlatform = 2;
+            float factor = 1f;
+            speedPlatform += factor;
+        }
+    }
+    public void ReloadPlatform()
+    {
+        speedPlatform = 10f;
+        countGetPlatform = 2;
         GameManager.Instanse.startPlatform.gameObject.SetActive(false); //временное решение со стартовой плаформой. Потом будет обычная сразу со старта
         for (PlatformController.lvlDifficult lvl = PlatformController.lvlDifficult.easy;
             lvl <= PlatformController.lvlDifficult.hard; lvl++)
@@ -56,6 +76,7 @@ public class PlatformManager : Singleton<PlatformManager>
     }
     public void EmergingPlatform()
     {
+        ChangePlatformSpeed();
         PlatformController.lvlDifficult lvl = (PlatformController.lvlDifficult)Random.Range(0, 2);
         float startPosition = 49.8f;
         PlatformController platf = GetPlatform(lvl);
