@@ -13,8 +13,6 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public CapsuleCollider cpsCollider;
     public float forceJump = 375f;
-    int score = 0;
-    int coin = 0;
     public Transform tr
     {
         get
@@ -82,6 +80,7 @@ public class PlayerController : MonoBehaviour
         if (coll.CompareTag("Coin"))
         {
             coll.gameObject.SetActive(false);
+            GameManager.Instanse.ChangeCoin();
         }
     }
 }
