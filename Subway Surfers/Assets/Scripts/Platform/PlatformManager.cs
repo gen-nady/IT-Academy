@@ -39,10 +39,24 @@ public class PlatformManager : Singleton<PlatformManager>
     }
     public void HidePlatform()
     {
+        GameManager.Instanse.startPlatform.gameObject.SetActive(false);
+        for (PlatformController.lvlDifficult lvl = PlatformController.lvlDifficult.easy;
+            lvl <= PlatformController.lvlDifficult.hard; lvl++)
+        {
+            Debug.Log(lvl);
+            Debug.Log(poolPlatform[lvl].Count);
+            for (int i = 0; i < poolPlatform[lvl].Count; i++)
+            {
+                if (poolPlatform[lvl][i].gameObject.activeInHierarchy)
+                {
+                    poolPlatform[lvl][i].gameObject.SetActive(false);
+                }
+            }
+        }
     }
     public void EmergingPlatform()
     {
-        PlatformController.lvlDifficult lvl = (PlatformController.lvlDifficult)Random.Range(0,2);
+        PlatformController.lvlDifficult lvl = (PlatformController.lvlDifficult)Random.Range(0, 2);
         float startPosition = 49.8f;
         PlatformController platf = GetPlatform(lvl);
         platf.transform.position = new Vector3(startPositionPlatform.position.x + startPosition,

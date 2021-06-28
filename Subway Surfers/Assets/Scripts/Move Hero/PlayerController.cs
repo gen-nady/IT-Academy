@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         if (coll.CompareTag("GameOver"))
         {
-            Application.LoadLevel(0);
+            GameManager.Instanse.RestartLvl();
         }
         if (coll.CompareTag("Coin"))
         {

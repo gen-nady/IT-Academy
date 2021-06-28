@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedPlatform: 10
-  lvl: 1
+  lvl: 2
 --- !u!1001 &58314129460354840
 PrefabInstance:
   m_ObjectHideFlags: 0
