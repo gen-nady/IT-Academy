@@ -15,25 +15,18 @@ public class PlayerController : MonoBehaviour
     LayerMask groundCheckLayer;
     [Tooltip("Rigibody Player")]
     [SerializeField]
-    Rigidbody rb;
+    Rigidbody rigibodyPlayer;
     [SerializeField]
     float forceJump;
     float groundRadius = 0.2f;
     bool isGrounded;
     [HideInInspector]
-    public float factorForceJump = 1f;
-    [HideInInspector]
-    public bool isMagnet = false;
-    Transform tr
-    {
-        get
-        {
-            return transform;
-        }
-    }
+    public float factorForceJump = 1f; 
+    Transform transformPlayer;
     void Awake()
     {
         inputController = GetComponent<InputController>();
+        transformPlayer = GetComponent<Transform>();
     }
     void Update()
     {
@@ -60,37 +53,37 @@ public class PlayerController : MonoBehaviour
     }
     void Jump()
     {
-        rb.AddForce(new Vector3(0f, forceJump*factorForceJump, 0f), ForceMode.Impulse);
+        rigibodyPlayer.AddForce(new Vector3(0f, forceJump*factorForceJump, 0f), ForceMode.Impulse);
     }
     void Down()
     {
-        rb.AddForce(new Vector3(0f, -forceJump * 2, 0f), ForceMode.Impulse);
+        rigibodyPlayer.AddForce(new Vector3(0f, -forceJump * 2, 0f), ForceMode.Impulse);
     }
     void Right()
     {
         float rightBand = -4f;
-        if (tr.position.z > rightBand && !Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y,
+        if (transformPlayer.position.z > rightBand && !Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y,
             transform.position.z + rightBand), 0.1f))
-            tr.Translate(0f, 0f, rightBand);
+            transformPlayer.Translate(0f, 0f, rightBand);
     }
     void Left()
     {
         float leftBand = 4f;
-        if (tr.position.z < leftBand && !Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y,
+        if (transformPlayer.position.z < leftBand && !Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y,
             transform.position.z + leftBand), 0.1f))
-            tr.Translate(0f, 0f, leftBand);
+            transformPlayer.Translate(0f, 0f, leftBand);
     }
     IEnumerator HighJumping()
     {
         factorForceJump = 1.6f;
-        yield return new WaitForSeconds(GameManager.Instanse.waitUpgrade);
+        yield return new WaitForSeconds(GameManager.Instanse.activeBonusTime);
         factorForceJump = 1f;
     }
     IEnumerator Magnet()
     {
-        isMagnet = true;
-        yield return new WaitForSeconds(GameManager.Instanse.waitUpgrade);
-        isMagnet = false;
+        GameManager.Instanse.isMagnet = true;
+        yield return new WaitForSeconds(GameManager.Instanse.activeBonusTime);
+        GameManager.Instanse.isMagnet = false;
     }
 
     private void OnTriggerEnter(Collider coll)
@@ -102,22 +95,26 @@ public class PlayerController : MonoBehaviour
         if (coll.CompareTag("Coin"))
         {
             coll.gameObject.SetActive(false);
+            AudioManager.Instanse.PickUpCoin();
             GameManager.Instanse.ChangeCoin();
         }
         if (coll.CompareTag("Score"))
         {
             StartCoroutine(GameManager.Instanse.DoubleScore());
             coll.gameObject.SetActive(false);
+            AudioManager.Instanse.PickUpBuster();
         }
         if (coll.CompareTag("Jump"))
         {
             StartCoroutine(HighJumping());
             coll.gameObject.SetActive(false);
+            AudioManager.Instanse.PickUpBuster();
         }
         if (coll.CompareTag("Magnet"))
         {
             StartCoroutine(Magnet());
             coll.gameObject.SetActive(false);
+            AudioManager.Instanse.PickUpBuster();
         }
     }
 }

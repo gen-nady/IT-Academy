@@ -1,24 +1,22 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlatformManager : Singleton<PlatformManager>
 {
-    [Tooltip("Платформы")]
+    [Tooltip("Platforms")]
     [SerializeField]
     PlatformController[] platforms;
 
     Dictionary<PlatformController.lvlDifficult, List<PlatformController>> poolPlatform;
 
-    [Tooltip("Стартовая позиция платформы")]
+    [Tooltip("Start position platform")]
     [SerializeField]
     Transform startPositionPlatform;
 
-    [Tooltip("Скорость платформ")]
-    public float speedPlatform = 10;
+    [Tooltip("Speed platform")]
+    public int speedPlatform = 10;
 
     int countGetPlatform = 2;
-
 
     private void Awake()
     {
@@ -53,13 +51,13 @@ public class PlatformManager : Singleton<PlatformManager>
         if (countGetPlatform == 0)
         {
             countGetPlatform = 2;
-            float factor = 1f;
+            int factor = 1;
             speedPlatform += factor;
         }
     }
     public void ReloadPlatform()
     {
-        speedPlatform = 10f;
+        speedPlatform = 10;
         countGetPlatform = 2;
         GameManager.Instanse.startPlatform.gameObject.SetActive(false); //временное решение со стартовой плаформой. Потом будет обычная сразу со старта
         for (PlatformController.lvlDifficult lvl = PlatformController.lvlDifficult.easy;

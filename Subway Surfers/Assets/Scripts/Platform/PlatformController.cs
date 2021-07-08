@@ -1,20 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlatformController : MonoBehaviour
 {
-    [Tooltip("Сложность платформы")]
+    [Tooltip("Difficult platform")]
     public lvlDifficult lvl;
-    [Tooltip("Скорость плафтормы")]
-    Vector3 directionPlatform; 
+    Vector3 directionPlatform = new Vector3(-1f, 0f, 0f);
     public enum lvlDifficult
     {
         easy, medium, hard
-    }
-    void Awake()
-    {
-        directionPlatform = new Vector3(-1f, 0f, 0f);
     }
     void Update()
     {
